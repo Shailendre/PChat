@@ -1,5 +1,6 @@
 package com.example.amaterasu.pchat;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.app.FragmentTransaction;
@@ -16,11 +17,13 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HomeScreen extends AppCompatActivity{
     /**
@@ -65,6 +68,13 @@ public class HomeScreen extends AppCompatActivity{
 
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.menu_home_screen,menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -72,8 +82,9 @@ public class HomeScreen extends AppCompatActivity{
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.icon_settings) {
+            Toast.makeText(getApplicationContext(),"You selected settings icon!",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this,Settings.class));
         }
 
         return super.onOptionsItemSelected(item);

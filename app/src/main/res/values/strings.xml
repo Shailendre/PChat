@@ -31,5 +31,6 @@
     <string name="tab_online">ONLINE</string>
     <string name="tab_contact">CONTACTS</string>
     <string name="tab_recent">RECENT</string>
+    <string name="settings_title">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 </resources>
