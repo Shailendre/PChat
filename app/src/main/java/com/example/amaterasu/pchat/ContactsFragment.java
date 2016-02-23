@@ -64,9 +64,10 @@ public class ContactsFragment extends Fragment {
         LoadContact loadContact = new LoadContact();
         loadContact.execute();
 
-        search = (SearchView) cf_View.findViewById(R.id.searchView);
+        //search = (SearchView) cf_View.findViewById(R.id.searchView);
 
         //*** setOnQueryTextListener ***
+        /*
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
@@ -84,7 +85,7 @@ public class ContactsFragment extends Fragment {
             }
         });
 
-
+        */
 
         return cf_View;
     }

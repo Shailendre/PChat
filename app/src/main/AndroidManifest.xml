@@ -31,8 +31,12 @@
         <activity
             android:name=".HomeScreen"
             android:label="@string/title_activity_home_screen"
-            android:theme="@style/AppThemeNoActionBar"
-            ></activity>
+            android:theme="@style/AppThemeNoActionBar">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+
+        </activity>
 
         <activity
             android:name=".Settings"

@@ -136,6 +136,7 @@ public class SelectUserAdapter extends BaseAdapter {
         }
         notifyDataSetChanged();
     }
+
     static class ViewHolder {
         ImageView imageView;
         TextView title, phone;

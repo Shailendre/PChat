@@ -1,13 +1,18 @@
 package com.example.amaterasu.pchat;
 
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.SearchView;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.support.v4.app.Fragment;
@@ -21,9 +26,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
+//import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.amaterasu.pchat.SelectUser;
 
 public class HomeScreen extends AppCompatActivity{
     /**
@@ -43,6 +50,9 @@ public class HomeScreen extends AppCompatActivity{
     SlidingTabLayout tabs;
     CharSequence[] TabTitles={"ONLINE", "RECENT", "CONTACTS"};
     int NumOfTabs=3;
+    SelectUserAdapter adapter;
+
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +80,28 @@ public class HomeScreen extends AppCompatActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater=getMenuInflater();
-        menuInflater.inflate(R.menu.menu_home_screen,menu);
+        menuInflater.inflate(R.menu.menu_home_screen, menu);
+
+
+        searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.icon_search));
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // newText is text entered by user to SearchView
+                Toast.makeText(getApplicationContext(), newText, Toast.LENGTH_LONG).show();
+                adapter.filter(newText);
+                return false;
+            }
+        });
+
         return true;
     }
 
@@ -85,6 +116,9 @@ public class HomeScreen extends AppCompatActivity{
         if (id == R.id.icon_settings) {
             Toast.makeText(getApplicationContext(),"You selected settings icon!",Toast.LENGTH_LONG).show();
             startActivity(new Intent(this,Settings.class));
+        }
+
+        if (id == R.id.icon_search){
         }
 
         return super.onOptionsItemSelected(item);
