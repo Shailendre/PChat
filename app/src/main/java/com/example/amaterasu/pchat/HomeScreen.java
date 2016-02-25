@@ -30,7 +30,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.amaterasu.pchat.SelectUser;
+import com.example.amaterasu.pchat.ContactsFragment;
 
 public class HomeScreen extends AppCompatActivity{
     /**
@@ -65,6 +65,7 @@ public class HomeScreen extends AppCompatActivity{
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         obSectionPagerAdapter = new SectionPagerAdapter(getSupportFragmentManager(),TabTitles,NumOfTabs);
+
         // Set up the ViewPager with the sections adapter.
         obViewPager = (ViewPager) findViewById(R.id.container);
         obViewPager.setAdapter(obSectionPagerAdapter);
@@ -96,8 +97,7 @@ public class HomeScreen extends AppCompatActivity{
             @Override
             public boolean onQueryTextChange(String newText) {
                 // newText is text entered by user to SearchView
-                Toast.makeText(getApplicationContext(), newText, Toast.LENGTH_LONG).show();
-                adapter.filter(newText);
+                ContactsFragment.adapter.filter(newText);
                 return false;
             }
         });
@@ -123,4 +123,6 @@ public class HomeScreen extends AppCompatActivity{
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

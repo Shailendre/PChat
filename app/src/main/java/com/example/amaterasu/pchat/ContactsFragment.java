@@ -20,7 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SearchView;
+import android.support.v7.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.amaterasu.pchat.SelectUserAdapter;
@@ -47,7 +47,7 @@ public class ContactsFragment extends Fragment {
     // Pop up
     ContentResolver resolver;
     SearchView search;
-    SelectUserAdapter adapter;
+    static SelectUserAdapter adapter;
 
 
 
@@ -63,29 +63,6 @@ public class ContactsFragment extends Fragment {
         phones = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC");
         LoadContact loadContact = new LoadContact();
         loadContact.execute();
-
-        //search = (SearchView) cf_View.findViewById(R.id.searchView);
-
-        //*** setOnQueryTextListener ***
-        /*
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                // TODO Auto-generated method stub
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                // TODO Auto-generated method stub
-                adapter.filter(newText);
-                return false;
-            }
-        });
-
-        */
 
         return cf_View;
     }
