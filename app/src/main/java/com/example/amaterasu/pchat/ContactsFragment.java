@@ -1,5 +1,6 @@
 package com.example.amaterasu.pchat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import com.example.amaterasu.pchat.SelectUserAdapter;
 import com.example.amaterasu.pchat.SelectUser;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -128,9 +130,23 @@ public class ContactsFragment extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                    Log.e("search", "here---------------- listener");
-
                     SelectUser data = selectUsers.get(i);
+
+                    Intent intent = new Intent(getContext(),ChatScreen.class);
+                    intent.putExtra("user_name",data.getName());
+
+                    /*
+                    Bitmap bmp=(Bitmap)data.getThumb();
+                    ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                    bmp.compress(Bitmap.CompressFormat.JPEG, 50, bs);
+                    intent.putExtra("user_bmp_array", bs.toByteArray());
+                    */
+
+
+
+                    startActivity(intent);
+
+
                 }
             });
 
