@@ -59,6 +59,43 @@
             android:theme="@style/AppTheme"
             android:parentActivityName=".HomeScreen"/>
 
+
+        <activity
+            android:name=".Account"
+            android:label="Account"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".Settings"/>
+
+
+        <activity
+            android:name=".ChangeName"
+            android:label="Change Name"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".Account"/>
+
+
+        <activity
+            android:name=".DeleteAccount"
+            android:label="Delete Account"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".Account"/>
+
+
+        <activity
+            android:name=".Help"
+            android:label="Help"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".Account"/>
+
+
+
+        <activity
+            android:name=".FindFriends"
+            android:label="Find Friends"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".Account"/>
+
+
     </application>
 
 </manifest>
