@@ -15,7 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--
 
         <activity
             android:name=".Startup"
@@ -32,19 +31,18 @@
             android:label="@string/otp_title"
             android:theme="@style/AppTheme"/>
 
-        -->
 
         <activity
             android:name=".HomeScreen"
             android:label="@string/title_activity_home_screen"
             android:theme="@style/AppThemeNoActionBar">
-
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+            -->
         </activity>
 
         <activity
