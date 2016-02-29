@@ -32,6 +32,8 @@ import android.widget.Toast;
 
 import com.example.amaterasu.pchat.ContactsFragment;
 
+import java.security.acl.Group;
+
 public class HomeScreen extends AppCompatActivity{
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -48,9 +50,9 @@ public class HomeScreen extends AppCompatActivity{
     SectionPagerAdapter obSectionPagerAdapter;
     ViewPager obViewPager;
     SlidingTabLayout tabs;
-    CharSequence[] TabTitles={"ONLINE", "RECENT", "CONTACTS"};
+    CharSequence[] TabTitles={"ONLINE", "CHATS", "CONTACTS"};
     int NumOfTabs=3;
-    SelectUserAdapter adapter;
+
 
     private SearchView searchView;
 
@@ -97,7 +99,7 @@ public class HomeScreen extends AppCompatActivity{
             @Override
             public boolean onQueryTextChange(String newText) {
                 // newText is text entered by user to SearchView
-                ContactsFragment.adapter.filter(newText);
+                LoadContact.adapter.filter(newText);
                 return false;
             }
         });
@@ -113,13 +115,13 @@ public class HomeScreen extends AppCompatActivity{
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.icon_settings) {
-            Toast.makeText(getApplicationContext(),"You selected settings icon!",Toast.LENGTH_LONG).show();
+        if (id == R.id.icon_settings)
             startActivity(new Intent(this,Settings.class));
-        }
 
-        if (id == R.id.icon_search){
-        }
+        if (id == R.id.icon_search){}
+
+        if(id == R.id.icon_group_chat)
+            startActivity(new Intent(this, GroupChat.class));
 
         return super.onOptionsItemSelected(item);
     }
