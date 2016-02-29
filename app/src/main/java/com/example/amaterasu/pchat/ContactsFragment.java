@@ -1,5 +1,6 @@
 package com.example.amaterasu.pchat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,12 +21,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SearchView;
+import android.support.v7.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.amaterasu.pchat.SelectUserAdapter;
 import com.example.amaterasu.pchat.SelectUser;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +49,7 @@ public class ContactsFragment extends Fragment {
     // Pop up
     ContentResolver resolver;
     SearchView search;
-    SelectUserAdapter adapter;
+    static SelectUserAdapter adapter;
 
 
 
@@ -63,28 +65,6 @@ public class ContactsFragment extends Fragment {
         phones = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC");
         LoadContact loadContact = new LoadContact();
         loadContact.execute();
-
-        search = (SearchView) cf_View.findViewById(R.id.searchView);
-
-        //*** setOnQueryTextListener ***
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                // TODO Auto-generated method stub
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                // TODO Auto-generated method stub
-                adapter.filter(newText);
-                return false;
-            }
-        });
-
-
 
         return cf_View;
     }
@@ -150,9 +130,23 @@ public class ContactsFragment extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                    Log.e("search", "here---------------- listener");
-
                     SelectUser data = selectUsers.get(i);
+
+                    Intent intent = new Intent(getContext(),ChatScreen.class);
+                    intent.putExtra("user_name",data.getName());
+
+                    /*
+                    Bitmap bmp=(Bitmap)data.getThumb();
+                    ByteArrayOutputStream bs = new ByteArrayOutputStream();
+                    bmp.compress(Bitmap.CompressFormat.JPEG, 50, bs);
+                    intent.putExtra("user_bmp_array", bs.toByteArray());
+                    */
+
+
+
+                    startActivity(intent);
+
+
                 }
             });
 
