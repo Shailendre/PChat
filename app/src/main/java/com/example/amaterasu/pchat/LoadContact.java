@@ -30,7 +30,7 @@ class LoadContact extends AsyncTask<Void, Void, Void> {
     private ListView listView;
     private Cursor phones;
     private ContentResolver resolver;
-    static SelectUserAdapter adapter;
+    static SelectUserAdapter selectUserAdapter;
     private Context context;
     private boolean showCheckBox;
 
@@ -40,7 +40,7 @@ class LoadContact extends AsyncTask<Void, Void, Void> {
         this.listView = listView;
         this.phones = phones;
         this.resolver = resolver;
-        adapter = __adapter;
+        selectUserAdapter = __adapter;
         this.context = context;
         this.showCheckBox = showCheckBox;
 
@@ -63,7 +63,7 @@ class LoadContact extends AsyncTask<Void, Void, Void> {
     }
 
     public SelectUserAdapter getAdapter(){
-        return adapter;
+        return selectUserAdapter;
     }
 
 
@@ -105,7 +105,7 @@ class LoadContact extends AsyncTask<Void, Void, Void> {
                 selectUser.setName(name);
                 selectUser.setPhone(phoneNumber);
                 selectUser.setEmail(id);
-                selectUser.setCheckedBox(showCheckBox);
+                selectUser.setCheckedBox(false);
                 selectUsers.add(selectUser);
             }
         } else {
@@ -118,8 +118,8 @@ class LoadContact extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        adapter = new SelectUserAdapter(selectUsers, context);
-        listView.setAdapter(adapter);
+        selectUserAdapter = new SelectUserAdapter(selectUsers, context,showCheckBox);
+        listView.setAdapter(selectUserAdapter);
 
         listView.setFastScrollEnabled(true);
     }

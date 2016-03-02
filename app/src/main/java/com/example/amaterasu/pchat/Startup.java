@@ -99,8 +99,6 @@ public class Startup extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.startup_activity);
-        //ContentResolver cr = getContentResolver();
-        //cr.query(ContactsContract.Contacts, null, null, null, null);
 
         //initalize the component variables
         bToVerify=(Button)findViewById(R.id.bToVerify);

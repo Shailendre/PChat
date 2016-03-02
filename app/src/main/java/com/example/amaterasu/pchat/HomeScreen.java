@@ -99,7 +99,7 @@ public class HomeScreen extends AppCompatActivity{
             @Override
             public boolean onQueryTextChange(String newText) {
                 // newText is text entered by user to SearchView
-                LoadContact.adapter.filter(newText);
+                LoadContact.selectUserAdapter.filter(newText);
                 return false;
             }
         });

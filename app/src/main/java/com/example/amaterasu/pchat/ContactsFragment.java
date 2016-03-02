@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,13 +67,14 @@ public class ContactsFragment extends Fragment {
         LoadContact loadContact = new LoadContact(selectUsers,listView,phones,resolver,adapter,getContext(),false);
         loadContact.execute();
 
-
         listView = loadContact.getListView();
         selectUsers = loadContact.getSelectUsers();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //SparseBooleanArray grpmembers = listView.getCheckedItemPositions();
+                //Toast.makeText(getContext(),"Checked Item: " + grpmembers.size(),Toast.LENGTH_LONG).show();
 
                 SelectUser data = selectUsers.get(i);
 
