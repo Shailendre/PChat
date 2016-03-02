@@ -208,15 +208,6 @@ public class GroupChat extends AppCompatActivity {
     }
 
 
-    protected static String getTimeStamp(){
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-        Date date = new Date();
-        return dateFormat.format(date);
-
-    }
-
-
     static class BoolNameHolder{
         boolean hasMinMembers;
         String groupNames;

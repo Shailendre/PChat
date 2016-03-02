@@ -45,7 +45,7 @@ public class RecentFragment extends Fragment {
         Conversation conversation = new Conversation();
         conversation.setThumb(null);
         conversation.setName("DConv");
-        conversation.setDate(GroupChat.getTimeStamp());
+        conversation.setDate(UtilityClass.getTimeStamp());
 
         conversations.add(conversation);
 
