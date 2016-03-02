@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
+<!--
         <activity
             android:name=".Startup"
             android:label="@string/app_name">
@@ -30,19 +30,19 @@
             android:name=".Otp"
             android:label="@string/otp_title"
             android:theme="@style/AppTheme"/>
-
+-->
 
         <activity
             android:name=".HomeScreen"
             android:label="@string/title_activity_home_screen"
             android:theme="@style/AppThemeNoActionBar">
-            <!--
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            -->
+
         </activity>
 
         <activity
@@ -94,6 +94,24 @@
             android:label="Find Friends"
             android:theme="@style/AppTheme"
             android:parentActivityName=".Account"/>
+
+        <activity
+            android:name=".About"
+            android:label="About"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".Help"/>
+
+        <activity
+            android:name=".Faq"
+            android:label="FAQ"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".Help"/>
+
+        <activity
+            android:name=".ContactUs"
+            android:label="Contact us"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".Help"/>
 
 
     </application>
