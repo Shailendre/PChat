@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,7 @@ public class ContactsFragment extends Fragment {
     // Pop up
     ContentResolver resolver;
     SearchView search;
-    static SelectUserAdapter adapter;
+    SelectUserAdapter adapter;
 
 
 
@@ -63,95 +64,29 @@ public class ContactsFragment extends Fragment {
         listView = (ListView) cf_View.findViewById(R.id.contacts_list);
 
         phones = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC");
-        LoadContact loadContact = new LoadContact();
+        LoadContact loadContact = new LoadContact(selectUsers,listView,phones,resolver,adapter,getContext(),false);
         loadContact.execute();
 
-        return cf_View;
-    }
+        listView = loadContact.getListView();
+        selectUsers = loadContact.getSelectUsers();
 
-    // Load data on background
-    class LoadContact extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //SparseBooleanArray grpmembers = listView.getCheckedItemPositions();
+                //Toast.makeText(getContext(),"Checked Item: " + grpmembers.size(),Toast.LENGTH_LONG).show();
 
-        }
+                SelectUser data = selectUsers.get(i);
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            // Get Contact list from Phone
+                Intent intent = new Intent(getContext(),ChatScreen.class);
+                intent.putExtra("user_name",data.getName());
 
-            if (phones != null) {
-                Log.e("count", "" + phones.getCount());
-                if (phones.getCount() == 0) {
-                    Toast.makeText(getActivity(), "No contacts in your contact list.", Toast.LENGTH_LONG).show();
-                }
+                startActivity(intent);
 
-                while (phones.moveToNext()) {
-                    Bitmap bit_thumb = null;
-                    String id = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID));
-                    String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-                    String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    String EmailAddr = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA2));
-                    String image_thumb = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.PHOTO_THUMBNAIL_URI));
-                    try {
-                        if (image_thumb != null) {
-                            bit_thumb = MediaStore.Images.Media.getBitmap(resolver, Uri.parse(image_thumb));
-                        } else {
-                            Log.e("No Image Thumb", "--------------");
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    SelectUser selectUser = new SelectUser();
-                    selectUser.setThumb(bit_thumb);
-                    selectUser.setName(name);
-                    selectUser.setPhone(phoneNumber);
-                    selectUser.setEmail(id);
-                    selectUser.setCheckedBox(false);
-                    selectUsers.add(selectUser);
-                }
-            } else {
-                Log.e("Cursor close 1", "----------------");
             }
-            //phones.close();
-            return null;
-        }
+        });
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            adapter = new SelectUserAdapter(selectUsers, getActivity());
-            listView.setAdapter(adapter);
-
-            // Select item on listclick
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                    SelectUser data = selectUsers.get(i);
-
-                    Intent intent = new Intent(getContext(),ChatScreen.class);
-                    intent.putExtra("user_name",data.getName());
-
-                    /*
-                    Bitmap bmp=(Bitmap)data.getThumb();
-                    ByteArrayOutputStream bs = new ByteArrayOutputStream();
-                    bmp.compress(Bitmap.CompressFormat.JPEG, 50, bs);
-                    intent.putExtra("user_bmp_array", bs.toByteArray());
-                    */
-
-
-
-                    startActivity(intent);
-
-
-                }
-            });
-
-            listView.setFastScrollEnabled(true);
-        }
+        return cf_View;
     }
 
     @Override
@@ -161,3 +96,5 @@ public class ContactsFragment extends Fragment {
     }
 
 }
+
+

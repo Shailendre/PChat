@@ -13,7 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.amaterasu.pchat.R;
@@ -33,12 +36,15 @@ public class SelectUserAdapter extends BaseAdapter {
     private ArrayList<SelectUser> arraylist;
     Context _c;
     ViewHolder v;
+    boolean setCheckBox;
+    //static boolean[] grpmempos= new boolean[256];
 
-    public SelectUserAdapter(List<SelectUser> selectUsers, Context context) {
+    public SelectUserAdapter(List<SelectUser> selectUsers, Context context, boolean setCheckBox) {
         _data = selectUsers;
         _c = context;
         this.arraylist = new ArrayList<SelectUser>();
         this.arraylist.addAll(_data);
+        this.setCheckBox=setCheckBox;
     }
 
     @Override
@@ -69,10 +75,17 @@ public class SelectUserAdapter extends BaseAdapter {
             Log.e("Inside", "here--------------------------- In view2");
         }
 
+
+        //hiding the checkbox layout in contactsFragment but not in groupchat
+        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.checkbox_layout);
+
+        if (!setCheckBox)
+            linearLayout.setVisibility(View.INVISIBLE);
+
         v = new ViewHolder();
 
         v.title = (TextView) view.findViewById(R.id.name);
-        v.check = (CheckBox) view.findViewById(R.id.check);
+        v.check = (CheckBox) view.findViewById(R.id.checkbox);
         v.phone = (TextView) view.findViewById(R.id.no);
         v.imageView = (ImageView) view.findViewById(R.id.pic);
 
@@ -91,7 +104,7 @@ public class SelectUserAdapter extends BaseAdapter {
             }
             // Seting round image
             Bitmap bm = BitmapFactory.decodeResource(view.getResources(), R.mipmap.ic_launcher); // Load default image
-            RoundedBitmapDrawable roundedBitmapDrawable=
+            RoundedBitmapDrawable roundedBitmapDrawable =
                     RoundedBitmapDrawableFactory.create(view.getResources(), bm);
             roundedBitmapDrawable.setCircular(true);
             v.imageView.setImageDrawable(roundedBitmapDrawable);
@@ -103,18 +116,21 @@ public class SelectUserAdapter extends BaseAdapter {
 
         Log.e("Image Thumb", "--------------" + data.getThumb());
 
-        /*// Set check box listener android
+        // Set check box listener android
+
         v.check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CheckBox checkBox = (CheckBox) view;
-                if (checkBox.isChecked()) {
-                    data.setCheckedBox(true);
-                  } else {
-                    data.setCheckedBox(false);
-                }
-            }
-        });*/
+              CheckBox checkBox = (CheckBox) view;
+              if (checkBox.isChecked()) {
+              data.setCheckedBox(true);
+                        //grpmempos[i]=true;
+              } else {
+              data.setCheckedBox(false);
+              //grpmempos[i]=false;
+              }
+          }
+        });
 
         view.setTag(data);
         return view;
@@ -137,9 +153,23 @@ public class SelectUserAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+
+    public void addContact(SelectUser selectUser){
+
+        _data.add(selectUser);
+        notifyDataSetChanged();
+
+    }
+
+
     static class ViewHolder {
         ImageView imageView;
         TextView title, phone;
         CheckBox check;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return true;
     }
 }
