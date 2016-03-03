@@ -33,4 +33,5 @@
     <string name="tab_recent">RECENT</string>
     <string name="settings_title">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_accountdetail">accountdetail</string>
 </resources>

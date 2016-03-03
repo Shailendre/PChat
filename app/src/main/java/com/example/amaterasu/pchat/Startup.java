@@ -1,9 +1,6 @@
 package com.example.amaterasu.pchat;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
@@ -33,8 +30,6 @@ public class Startup extends AppCompatActivity  {
     final int ERR_NAME_NUMBER=2;
     final int ERR_C_CODE=3;
     int error;
-
-    final Context context = this;
     /*
     * Helper function to return string from edittext
     */
@@ -78,33 +73,34 @@ public class Startup extends AppCompatActivity  {
     */
     public void openDialog(int errorCase) {
 
-        //Dialog dialog = new Dialog(this);
-        //dialog.setContentView(R.layout.dialog_activity);
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_activity);
 
         if (errorCase == ERR_NUMBER) {
-            invokePrompt(context, getResources().getString(R.string.dialog_title_invalid_numb));
+            dialog.setTitle(R.string.dialog_title_invalid_numb);
             //dialog_info.setText(R.string.dialog_validation_false_numb);
         }
         else if (errorCase == ERR_USRNAME) {
-            invokePrompt(context, getResources().getString(R.string.dialog_title_invalid_name));
+            dialog.setTitle(R.string.dialog_title_invalid_name);
             //dialog_info.setText(R.string.dialog_validation_false_name);
         }
         else if (errorCase == ERR_C_CODE) {
-            invokePrompt(context, getResources().getString(R.string.dialog_title_invalid_ccode));
+            dialog.setTitle(R.string.dialog_title_invalid_ccode);
             //dialog_info.setText(R.string.dialog_validation_false_ccode);
         }
         else{
-            invokePrompt(context,getResources().getString(R.string.dialog_title_invalid_name_numb));
+            dialog.setTitle(R.string.dialog_title_invalid_name_numb);
         }
 
-
+        dialog.show();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.startup_activity);
-
+        //ContentResolver cr = getContentResolver();
+        //cr.query(ContactsContract.Contacts, null, null, null, null);
 
         //initalize the component variables
         bToVerify=(Button)findViewById(R.id.bToVerify);
@@ -154,26 +150,4 @@ public class Startup extends AppCompatActivity  {
         });
 
     }
-
-
-    private void invokePrompt(Context context,String msg){
-
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-        builder1.setMessage(msg);
-        builder1.setCancelable(true);
-
-        builder1.setPositiveButton(
-                "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
-
-    }
-
 }

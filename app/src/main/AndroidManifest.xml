@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
+        <!--
         <activity
             android:name=".Startup"
             android:label="@string/app_name">
@@ -30,95 +30,45 @@
             android:name=".Otp"
             android:label="@string/otp_title"
             android:theme="@style/AppTheme"/>
-
+        -->
 
         <activity
             android:name=".HomeScreen"
             android:label="@string/title_activity_home_screen"
             android:theme="@style/AppThemeNoActionBar">
-        <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        -->
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>>
+
         </activity>
-
         <activity
             android:name=".ChatScreen"
             android:label="@string/title_activity_home_screen"
-            android:theme="@style/AppThemeNoActionBar"
-            android:parentActivityName=".HomeScreen">
-        </activity>
-
-
+            android:parentActivityName=".HomeScreen"
+            android:theme="@style/AppThemeNoActionBar"></activity>
         <activity
             android:name=".Settings"
             android:label="@string/settings_title"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".HomeScreen"/>
-
-
+            android:parentActivityName=".HomeScreen"
+            android:theme="@style/AppTheme" />
         <activity
-            android:name=".Account"
-            android:label="Account"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".Settings"/>
+            android:name=".accountdetail"
+            android:label="@string/title_activity_accountdetail"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="com.example.amaterasu.pchat.accountdetail" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
-        <activity
-            android:name=".ChangeName"
-            android:label="Change Name"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".Account"/>
+            <activity
+                android:name="com.example.amaterasu.pchat.ChatBubbleActivity"
+                android:label="@string/app_name" >
 
-
-        <activity
-            android:name=".DeleteAccount"
-            android:label="Delete Account"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".Account"/>
-
-
-        <activity
-            android:name=".Help"
-            android:label="Help"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".Account"/>
-
-
-
-        <activity
-            android:name=".FindFriends"
-            android:label="Find Friends"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".Account"/>
-
-
-        <activity
-            android:name=".GroupChat"
-            android:label="Create New Group"
-            android:theme="@style/AppThemeNoActionBar"
-            android:parentActivityName=".ChatScreen"/>
-
-        <activity
-            android:name=".About"
-            android:label="About"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".Help"/>
-
-        <activity
-            android:name=".Faq"
-            android:label="FAQ"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".Help"/>
-
-        <activity
-            android:name=".ContactUs"
-            android:label="Contact us"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".Help"/>
+            </activity>
 
 
     </application>
