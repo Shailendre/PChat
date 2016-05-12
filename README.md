@@ -1,3 +1,5 @@
+#Please refer PChat2.0 for complete beta version **this repo is obslete**
+
 # PChat
 p2p android chat application
 
