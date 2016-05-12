@@ -1,4 +1,4 @@
-#Please refer PChat2.0 for complete beta version **this repo is obsolete**
+#Please refer P2PChat repo for complete beta version **this repo is obsolete**
 
 # PChat
 p2p android chat application
